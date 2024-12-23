@@ -32,6 +32,20 @@ export const TaskProvider = ({ children }) => {
     localStorage.setItem("schedule", JSON.stringify(schedule));
   }, [schedule]);
 
+  useEffect(() => {
+    const scheduleinterval = setInterval(() => {
+      const updatedSchedule = schedule.map((sche) => {
+        if (new Date(sche.dueDate) <= new Date() && sche.status !== "Overdue") {
+          return { ...sche, status: "Overdue" };
+        }
+        return sche;
+      });
+      setSchedule(updatedSchedule);
+    }, 60000);
+
+    return () => clearInterval(scheduleinterval);
+  }, [schedule]);
+
   const addSchedule = (sche) => {
     setSchedule([...schedule, sche]);
   };

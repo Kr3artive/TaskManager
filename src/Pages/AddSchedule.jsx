@@ -11,7 +11,19 @@ const AddSchedule = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newSchedule = { id: Date.now(), title, content, date };
+
+    const currentDate = new Date();
+    const dueDate = new Date(date);
+    const status = dueDate <= currentDate ? "Overdue" : "Pending";
+
+    const newSchedule = { 
+      id: Date.now(), 
+      title, 
+      content, 
+      dueDate: date,
+      status 
+    };
+
     addSchedule(newSchedule);
     navigate("/home");
   };
