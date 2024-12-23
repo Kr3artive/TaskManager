@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { TaskContext } from "../contexts/TaskContext";
-
+import { TiDelete } from "react-icons/ti";
 const PriorityCard = () => {
-  const { schedule } = useContext(TaskContext);
+  const { schedule, deleteSchedule } = useContext(TaskContext);
   console.log(schedule);
 
   return (
@@ -22,13 +22,18 @@ const PriorityCard = () => {
               <h1>
                 <b>Due Date:</b> {sche.dueDate}
               </h1>
-              <h1
-                className={`px-2 py-1 rounded text-black font-bold ${
-                  sche.status === "Overdue" ? "bg-red-500" : "bg-green-500"
-                }`}
-              >
-                {sche.status}
-              </h1>
+              <div className="flex items-center justify-between mt-2">
+                <h1
+                  className={`px-2 py-1 rounded text-black font-bold ${
+                    sche.status === "Overdue" ? "bg-red-500" : "bg-green-500"
+                  }`}
+                >
+                  {sche.status}
+                </h1>
+                <button onClick={() => deleteSchedule(sche.id)}>
+                  <TiDelete className="text-red-600" size={30} />
+                </button>
+              </div>
             </div>
           ))
         ) : (
