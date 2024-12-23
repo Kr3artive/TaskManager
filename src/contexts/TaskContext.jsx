@@ -4,11 +4,11 @@ export const TaskContext = createContext();
 
 export const TaskProvider = ({ children }) => {
   const [priority, setPriority] = useState([]);
-  const [schedule, setSchedule] = useState([])
+  const [schedule, setSchedule] = useState([]);
 
   useEffect(() => {
-    const savedpriority = JSON.parse(localStorage.getItem("priority")) || [];
-    setPriority(savedpriority);
+    const savedPriority = JSON.parse(localStorage.getItem("priority")) || [];
+    setPriority(savedPriority);
   }, []);
 
   useEffect(() => {
@@ -24,27 +24,36 @@ export const TaskProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const savedschedule = JSON.parse(localStorage.getItem("schedule")) || [];
-    setPriority(savedschedule);
+    const savedSchedule = JSON.parse(localStorage.getItem("schedule")) || [];
+    setSchedule(savedSchedule);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("priority", JSON.stringify(schedule));
+    localStorage.setItem("schedule", JSON.stringify(schedule));
   }, [schedule]);
 
   const addSchedule = (sche) => {
     setSchedule([...schedule, sche]);
   };
 
-  const deleteScehdule = (id) => {
-    setPriority(schedule.filter((sche) => sche.id !== id));
+  const deleteSchedule = (id) => {
+    setSchedule(schedule.filter((sche) => sche.id !== id));
   };
 
   return (
-    <TaskContext.Provider value={{ priority, addPriority, deletePriority, schedule, addSchedule, deleteScehdule }}>
+    <TaskContext.Provider
+      value={{
+        priority,
+        addPriority,
+        deletePriority,
+        schedule,
+        addSchedule,
+        deleteSchedule,
+      }}
+    >
       {children}
     </TaskContext.Provider>
   );
 };
 
-export default TaskProvider
+export default TaskProvider;
