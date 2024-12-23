@@ -15,7 +15,7 @@ const Footer = () => {
   };
 
   return (
-    <div className="flex items-center gap-2 justify-between">
+    <div className="flex mb-4 items-center gap-2 justify-between">
       <Link to={"/home"} className="grid">
         <div className="flex justify-center">
           <GrHomeRounded size={25} />
